@@ -101,7 +101,7 @@ class UserFormAuthenticator extends AbstractAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     { 
         $request->getSession()->remove(SecurityController::LAST_EMAIL);
-        $request->getSession()->getFlashBag()->add("danger", "Loged In Successefuly!");
+        $request->getSession()->getFlashBag()->add("success", "Loged In Successefuly!");
         return new RedirectResponse($this->urlGenarator->generate("app_home"));
     }
 

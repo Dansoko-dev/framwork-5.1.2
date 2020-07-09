@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Security\Core\Security;
 
 class SecurityController extends AbstractController
 {
@@ -50,8 +50,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login()
+    public function login(Security $security)
     {
+        if ($security->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_ANNONYMOUSLY');
         return $this->render('security/login.html.twig');
     }
